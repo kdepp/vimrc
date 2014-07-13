@@ -7,6 +7,8 @@ filetype plugin indent on
 
 " no backup file
 set nobackup
+" no swap file
+set noswapfile
 " show row & col 
 set ruler
 " show command in normal mode

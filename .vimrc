@@ -1,5 +1,3 @@
-
-let g:indent_guides_guide_size=1
 " use pathongen to load plugin bundle
 execute pathogen#infect()
 " show syntax color
@@ -36,4 +34,3 @@ nmap <F7> <F8>:cw<CR>
 nmap <F6> :ccl<CR><F8>
 
 colorscheme desert
-

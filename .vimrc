@@ -49,6 +49,8 @@ nmap <F6> :ccl<CR><F8>
 nmap <leader>f :MRU<CR>
 nmap <leader>gw :Gwrite<CR>
 nmap <leader>gc :Gcommit<CR>
+nmap <leader>gl :Git log<CR>
+nmap <leader>gd :Git diff<CR>
 
 " show the extra status line
 set laststatus=2

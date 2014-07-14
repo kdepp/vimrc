@@ -62,7 +62,7 @@ endfunction
 set statusline=\ %f%m%r%h\ %w\ %<CWD:\ %{CurDir()}\ %=Pos:\ %l/%L:%c\ %p%%\ 
 
 " settings for EasyMotion
-if !exists(g:EasyMotion_loaded)
+if !exists("g:EasyMotion_loaded")
 	let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 	" Bi-directional find motion

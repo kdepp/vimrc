@@ -8,3 +8,4 @@ https://github.com/terryma/vim-multiple-cursors.git
 https://github.com/mattn/emmet-vim.git
 https://github.com/scrooloose/syntastic.git
 https://github.com/godlygeek/tabular.git
+https://github.com/Lokaltog/vim-easymotion.git

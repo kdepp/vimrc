@@ -1,7 +1,8 @@
 #!/bin/bash
 
 CWD=`pwd`
-DIR=`dirname $0`
+DIR_TMP=`dirname $0`
+DIR=`cd DIR_TMP; pwd`
 PLUGIN_CONFIG_DIR=$DIR/plugin_config
 HOME_DIR=~
 VIM_DIR=$HOME_DIR/.vim

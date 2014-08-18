@@ -72,4 +72,12 @@ if [[ -d "$BUNDLE_DIR/Command-T" ]]; then
     echo_block
 fi
 
+# set up coffee lint
+if [[ -d "$BUNDLE_DIR/vim-coffee-script" ]]; then
+    echo_config "setting up coffee-lint..."
+    cp $PLUGIN_CONFIG_DIR/coffeelint.json $HOME_DIR
+    echo_config "coffee-lint set up."
+    echo_block
+fi
+
 cd $CWD

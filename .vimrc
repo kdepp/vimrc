@@ -66,11 +66,11 @@ nmap <C-K> ddkP
 " show the extra status line
 set laststatus=2
 function! CurDir()
-	let curdir = substitute(getcwd(), '/home/peter', "~/", "g")
+	let curdir = substitute(getcwd(), '/Users/kdepp', "~/", "g")
 	return curdir
 endfunction
 " define the status line content
-set statusline=\ %f%m%r%h\ %w\ %<CWD:\ %{CurDir()}\ %=Pos:\ %l/%L:%c\ %p%%\ 
+" set statusline=\ %f%m%r%h\ %w\ %<CWD:\ %{CurDir()}\ %=Pos:\ %l/%L:%c\ %p%%\ 
 
 " settings for EasyMotion
 if !exists("g:EasyMotion_loaded")

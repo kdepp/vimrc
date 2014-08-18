@@ -41,6 +41,10 @@ set fileencoding=chinese
 set fileencodings=ucs-bom,utf-8,chinese,cp936
 set langmenu=zh_CN,utf-8
 
+" leader key
+let mapleader = ","
+let g:mapleader = ","
+
 " customized hotkey
 nmap <Left> :bp<CR>
 nmap <Right> :bn<CR>

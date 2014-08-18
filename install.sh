@@ -83,7 +83,7 @@ if [[ -d $BUNDLE_DIR/vim-coffee-script ]]; then
 fi
 
 # set up snipmate
-if [[ -d $BUNDLE_DIR/snipmate ]]; then
+if [[ -d $BUNDLE_DIR/snipmate.vim ]]; then
     echo_config "setting up snipmate..."
     cp -r $DIR/snippets $VIM_DIR
     echo_config "snipmate set up."

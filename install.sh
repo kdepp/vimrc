@@ -2,10 +2,10 @@
 
 CWD=`pwd`
 DIR=`dirname $0`
-PLUGIN_CONFIG_DIR="$DIR/plugin_config"
-HOME_DIR="~"
-BUNDLE_DIR="$HOME_DIR/.vim/bundle"
-AUTOLOAD_DIR="$HOME_DIR/.vim/autoload"
+PLUGIN_CONFIG_DIR=$DIR/plugin_config
+HOME_DIR=~
+BUNDLE_DIR=$HOME_DIR/.vim/bundle
+AUTOLOAD_DIR=$HOME_DIR/.vim/autoload
 INSTALL_MSG_PREFIX="Install:"
 CONFIG_MSG_PREFIX="Config:"
 

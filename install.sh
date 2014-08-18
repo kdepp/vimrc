@@ -4,8 +4,9 @@ CWD=`pwd`
 DIR=`dirname $0`
 PLUGIN_CONFIG_DIR=$DIR/plugin_config
 HOME_DIR=~
-BUNDLE_DIR=$HOME_DIR/.vim/bundle
-AUTOLOAD_DIR=$HOME_DIR/.vim/autoload
+VIM_DIR=$HOME_DIR/.vim
+BUNDLE_DIR=$VIM_DIR/bundle
+AUTOLOAD_DIR=$VIM_DIR/autoload
 INSTALL_MSG_PREFIX="Install:"
 CONFIG_MSG_PREFIX="Config:"
 
@@ -65,7 +66,7 @@ else
 fi
 
 # set up Command-T
-if [[ -d "$BUNDLE_DIR/Command-T" ]]; then
+if [[ -d $BUNDLE_DIR/Command-T ]]; then
     echo_config "setting up command-t..."
     cd "$BUNDLE_DIR/Command-T/ruby/command-t" && ruby extconf.rb && make
     echo_config "command-t built."
@@ -73,10 +74,18 @@ if [[ -d "$BUNDLE_DIR/Command-T" ]]; then
 fi
 
 # set up coffee lint
-if [[ -d "$BUNDLE_DIR/vim-coffee-script" ]]; then
+if [[ -d $BUNDLE_DIR/vim-coffee-script ]]; then
     echo_config "setting up coffee-lint..."
     cp $PLUGIN_CONFIG_DIR/coffeelint.json $HOME_DIR
     echo_config "coffee-lint set up."
+    echo_block
+fi
+
+# set up snipmate
+if [[ -d $BUNDLE_DIR/snipmate ]]; then
+    echo_config "setting up snipmate..."
+    cp -r $DIR/snippets $VIM_DIR
+    echo_config "snipmate set up."
     echo_block
 fi
 

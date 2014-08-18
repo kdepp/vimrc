@@ -46,6 +46,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 " customized hotkey
+nmap <leader>w :w!<cr>
 nmap <Left> :bp<CR>
 nmap <Right> :bn<CR>
 nmap <Down> :bn<CR>:bd #<CR>

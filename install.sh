@@ -64,4 +64,12 @@ else
 	echo_install " no pathogen_plugins.txt file found."
 fi
 
+# set up Command-T
+if [[ -d "$BUNDLE_DIR/Command-T" ]]; then
+    echo_config "setting up command-t..."
+    cd "$BUNDLE_DIR/Command-T/ruby/command-t" && ruby extconf.rb && make
+    echo_config "command-t built."
+    echo_block
+fi
+
 cd $CWD

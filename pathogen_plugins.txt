@@ -10,4 +10,5 @@ https://github.com/scrooloose/syntastic.git
 https://github.com/godlygeek/tabular.git
 https://github.com/Lokaltog/vim-easymotion.git
 https://github.com/vim-scripts/YankRing.vim.git
+https://github.com/wincent/Command-T.git
 https://github.com/kchmck/vim-coffee-script.git

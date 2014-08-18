@@ -17,12 +17,16 @@ set showcmd
 set sw=4
 " tabstop = 4
 set ts=4
+" expand tab
+set et
 " reserve N lines scrolloff while moving up/down 
 set so=3
 " in command mode, press wildchar (<Tab>) to show tips, <C-P>/<C-N> to move around
 set wildmenu
 " highlight the current line
 set cursorline
+" highlight the current column
+set cursorcolumn
 " show no line number in default
 set nonu
 " highlight search words
@@ -80,6 +84,11 @@ if !exists("g:EasyMotion_loaded")
 	" JK motions: Line motions
 	map <Leader>j <Plug>(easymotion-j)
 	map <Leader>k <Plug>(easymotion-k)
+endif
+
+" settings for coffeelint
+if exists("g:loaded_syntastic_coffee_coffeelint_checker")
+    let g:syntastic_coffee_coffeelint_args = "--report csv --file ~/coffeelint.json"
 endif
 
 colorscheme desert

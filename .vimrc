@@ -60,6 +60,8 @@ nmap <leader>gw :Gwrite<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gl :Git log<CR>
 nmap <leader>gd :Git diff<CR>
+nmap <C-J> ddp
+nmap <C-K> ddkP
 
 " show the extra status line
 set laststatus=2

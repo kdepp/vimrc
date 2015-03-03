@@ -37,7 +37,7 @@ set incsearch
 " set encodings
 set encoding=utf-8
 set termencoding=utf-8
-set fileencoding=chinese
+set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,chinese,cp936
 set langmenu=zh_CN,utf-8
 

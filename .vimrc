@@ -45,6 +45,17 @@ set langmenu=zh_CN,utf-8
 let mapleader = ","
 let g:mapleader = ","
 
+" auto fold
+set foldmethod=syntax
+set foldlevelstart=1
+set foldnestmax=2
+
+" javascript auto fold
+let javaScript_fold=1
+
+" coffeescript auto fold
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
 " customized hotkey
 nmap <leader>w :w!<cr>
 nmap <Left> :bp<CR>

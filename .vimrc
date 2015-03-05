@@ -53,10 +53,25 @@ set foldnestmax=2
 " javascript auto fold
 let javaScript_fold=1
 
+" javascript auto setting
+augroup javascript
+    autocmd!
+    " Comment a block of js
+    autocmd BufNewFile,BufReadPost *.js vnoremap <leader>c :normal i//<CR>
+    " Uncomment a block of js
+    autocmd BufNewFile,BufReadPost *.js vnoremap <leader>C :normal xx<CR>
+    autocmd BufNewFile,BufReadPost *.js nnoremap <leader>C :execute "normal :set hls!\r?^[^\/]*$\rjV/^[^\/]*$\rk"<CR>:normal xx<CR>:execute "normal /%%^###@@@%\r:set hls\r"<CR>
+augroup END
+
 " coffeescript auto setting
 augroup coffee
     autocmd!
-    autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+    autocmd BufNewFile,BufReadPost *.coffee,Cakefile setl foldmethod=indent nofoldenable
+    " Comment a block of coffee
+    autocmd BufNewFile,BufReadPost *.coffee,Cakefile vnoremap <leader>c :normal i#<CR>
+    " Uncomment a block of coffee
+    autocmd BufNewFile,BufReadPost *.coffee,Cakefile vnoremap <leader>C :normal x<CR>
+    autocmd BufNewFile,BufReadPost *.coffee,Cakefile nnoremap <leader>C :execute "normal :set hls!\r?^[^#]*$\rjV/^[^#]*$\rk"<CR>:normal x<CR>:execute "normal /%%^###@@@%\r:set hls\r"<CR>
 augroup END
 
 " html auto setting
@@ -66,15 +81,22 @@ augroup html
     autocmd BufNewFile,BufReadPost *.html setl foldmethod=manual
     " fold a block of html
     autocmd FileType html nnoremap <buffer> <leader>z Vatzf
+    " Comment a block of html
+    autocmd FileType html vnoremap <leader>c <ESC>`<O<!--<ESC>`>o<ESC>I--><ESC>
+    " Uncomment a block of html
+    autocmd FileType html vnoremap <leader>C <ESC>`<dd`>dd
+    autocmd FileType html nnoremap <leader>C :execute "normal ?^<!--\rdd/^-->\rdd"<CR>
 augroup END
 
 " customized hotkey
-nnoremap <leader>w :w!<cr>
+vnoremap <Space> <ESC>
+nnoremap <Space> <ESC>
+onoremap <Space> <ESC>
+nnoremap <leader>w :w!<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Right> :bn<CR>
 nnoremap <Down> :bn<CR>:bd #<CR>
 nnoremap ` <C-Y>
-nnoremap <Space> <C-E>
 nnoremap <F8> :TrinityToggleNERDTree<CR>
 nnoremap <F7> <F8>:cw<CR>
 nnoremap <F6> :ccl<CR><F8>
@@ -85,6 +107,22 @@ nnoremap <leader>gl :Git log<CR>
 nnoremap <leader>gd :Git diff<CR>
 nnoremap <C-J> ddp
 nnoremap <C-K> ddkP
+" Edit the vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+" Source the vimrc
+nnoremap <leader>sv :source $MYVIMRC<CR>
+" Turn the last word to upper case
+inoremap <c-u> <ESC>bvwUea
+" Double Quote the word
+nnoremap <leader>" viw<ESC>bi"<ESC>ea"<ESC>
+" Single Quote the word
+nnoremap <leader>' viw<ESC>bi'<ESC>ea'<ESC>
+vnoremap <leader>' <ESC>`<i'<ESC>`>la'<ESC>
+" Exit insert mode
+inoremap jk <ESC>
+inoremap <ESC> <nop>
+" Operator Mapping, email
+onoremap i@ :execute "normal! /\\w\\+\\(\\.\\w\\+\\)*@\\(\\w\\+\\.\\)\\+\\w\\+\rv//e\r"<CR>
 
 " show the extra status line
 set laststatus=2

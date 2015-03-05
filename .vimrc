@@ -57,22 +57,22 @@ let javaScript_fold=1
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
 " customized hotkey
-nmap <leader>w :w!<cr>
-nmap <Left> :bp<CR>
-nmap <Right> :bn<CR>
-nmap <Down> :bn<CR>:bd #<CR>
-nmap ` <C-Y>
-nmap <Space> <C-E>
-nmap <F8> :TrinityToggleNERDTree<CR>
-nmap <F7> <F8>:cw<CR>
-nmap <F6> :ccl<CR><F8>
-nmap <leader>f :MRU<CR>
-nmap <leader>gw :Gwrite<CR>
-nmap <leader>gc :Gcommit<CR>
-nmap <leader>gl :Git log<CR>
-nmap <leader>gd :Git diff<CR>
-nmap <C-J> ddp
-nmap <C-K> ddkP
+nnoremap <leader>w :w!<cr>
+nnoremap <Left> :bp<CR>
+nnoremap <Right> :bn<CR>
+nnoremap <Down> :bn<CR>:bd #<CR>
+nnoremap ` <C-Y>
+nnoremap <Space> <C-E>
+nnoremap <F8> :TrinityToggleNERDTree<CR>
+nnoremap <F7> <F8>:cw<CR>
+nnoremap <F6> :ccl<CR><F8>
+nnoremap <leader>f :MRU<CR>
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gl :Git log<CR>
+nnoremap <leader>gd :Git diff<CR>
+nnoremap <C-J> ddp
+nnoremap <C-K> ddkP
 
 " show the extra status line
 set laststatus=2

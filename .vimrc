@@ -53,8 +53,20 @@ set foldnestmax=2
 " javascript auto fold
 let javaScript_fold=1
 
-" coffeescript auto fold
-autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+" coffeescript auto setting
+augroup coffee
+    autocmd!
+    autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+augroup END
+
+" html auto setting
+augroup html
+    autocmd!
+    " manual fold
+    autocmd BufNewFile,BufReadPost *.html setl foldmethod=manual
+    " fold a block of html
+    autocmd FileType html nnoremap <buffer> <leader>z Vatzf
+augroup END
 
 " customized hotkey
 nnoremap <leader>w :w!<cr>

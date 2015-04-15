@@ -22,8 +22,8 @@ set et
 " reserve N lines scrolloff while moving up/down 
 set so=3
 " in command mode, press wildchar (<Tab>) to show tips, <C-P>/<C-N> to move around
-set wildmenu
 " highlight the current line
+set wildmenu
 set cursorline
 " highlight the current column
 set cursorcolumn
@@ -96,15 +96,10 @@ nnoremap <leader>w :w!<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Right> :bn<CR>
 nnoremap <Down> :bn<CR>:bd #<CR>
-nnoremap ` <C-Y>
 nnoremap <F8> :TrinityToggleNERDTree<CR>
-nnoremap <F7> <F8>:cw<CR>
-nnoremap <F6> :ccl<CR><F8>
+nnoremap <F7> :botr cw<CR>
+nnoremap <F6> :ccl<CR>
 nnoremap <leader>f :MRU<CR>
-nnoremap <leader>gw :Gwrite<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gl :Git log<CR>
-nnoremap <leader>gd :Git diff<CR>
 nnoremap <C-J> ddp
 nnoremap <C-K> ddkP
 " Edit the vimrc
@@ -123,6 +118,25 @@ inoremap jk <ESC>
 inoremap <ESC> <nop>
 " Operator Mapping, email
 onoremap i@ :execute "normal! /\\w\\+\\(\\.\\w\\+\\)*@\\(\\w\\+\\.\\)\\+\\w\\+\rv//e\r"<CR>
+" Sudo write
+cmap w!! w !sudo tee > /dev/null %
+
+nnoremap <leader>vv :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> botr cw<CR>
+nnoremap <leader>VV :execute "vimgrep /" . shellescape(expand("<cWORD>")) . "/j **" <Bar> botr cw<CR>
+nnoremap <leader>v :set operatorfunc=GrepOperator<CR>g@
+vnoremap <leader>v :<c-u>call GrepOperator(visualmode())<CR>
+
+function! GrepOperator(type)
+    if a:type ==# 'v'
+        normal! `<v`>y
+    elseif a:type ==# 'char'
+        normal! `[v`]y
+    else
+        return
+    endif
+
+    execute "vimgrep /" . @@ . "/j **" | botr cw
+endfunction
 
 " show the extra status line
 set laststatus=2

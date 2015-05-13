@@ -33,6 +33,8 @@ set nonu
 set hls
 " increasing search
 set incsearch
+" shellpipe set to >, prevent command from duplicating the output to the terminal
+set sp=>
 
 " set encodings
 set encoding=utf-8
@@ -78,6 +80,7 @@ augroup END
 augroup html
     autocmd!
     " manual fold
+    autocmd BufNewFile,BufRead *.ejs set filetype=html
     autocmd BufNewFile,BufReadPost *.html setl foldmethod=manual
     " fold a block of html
     autocmd FileType html nnoremap <buffer> <leader>z Vatzf
@@ -93,12 +96,15 @@ vnoremap <Space> <ESC>
 nnoremap <Space> <ESC>
 onoremap <Space> <ESC>
 nnoremap <leader>w :w!<CR>
+nnoremap <leader>q :q<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Right> :bn<CR>
 nnoremap <Down> :bn<CR>:bd #<CR>
 nnoremap <F8> :TrinityToggleNERDTree<CR>
 nnoremap <F7> :botr cw<CR>
 nnoremap <F6> :ccl<CR>
+nnoremap <F5> :set paste<CR>
+nnoremap <F4> :set nopaste<CR>
 nnoremap <leader>f :MRU<CR>
 nnoremap <C-J> ddp
 nnoremap <C-K> ddkP
@@ -123,6 +129,8 @@ cmap w!! w !sudo tee > /dev/null %
 
 nnoremap <leader>vv :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> botr cw<CR>
 nnoremap <leader>VV :execute "vimgrep /" . shellescape(expand("<cWORD>")) . "/j **" <Bar> botr cw<CR>
+nnoremap <leader>aa :execute "Ack! " . expand("<cword>")<CR>
+nnoremap <leader>VV :execute "Ack! " . shellescape(expand("<cWORD>"))<CR>
 nnoremap <leader>v :set operatorfunc=GrepOperator<CR>g@
 vnoremap <leader>v :<c-u>call GrepOperator(visualmode())<CR>
 

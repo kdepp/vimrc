@@ -63,6 +63,7 @@ augroup javascript
     " Uncomment a block of js
     autocmd BufNewFile,BufReadPost *.js vnoremap <leader>C :normal xx<CR>
     autocmd BufNewFile,BufReadPost *.js nnoremap <leader>C :execute "normal :set hls!\r?^[^\/]*$\rjV/^[^\/]*$\rk"<CR>:normal xx<CR>:execute "normal /%%^###@@@%\r:set hls\r"<CR>
+    autocmd BufNewFile,BufReadPost *.js nnoremap <leader>d :<C-u>call AddJSDoc()<CR>
 augroup END
 
 " coffeescript auto setting
@@ -96,7 +97,8 @@ vnoremap <Space> <ESC>
 nnoremap <Space> <ESC>
 onoremap <Space> <ESC>
 nnoremap <leader>w :w!<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <leader>q :qa<CR>
+nnoremap <leader>. :e .<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Right> :bn<CR>
 nnoremap <Down> :bn<CR>:bd #<CR>
@@ -121,7 +123,7 @@ nnoremap <leader>' viw<ESC>bi'<ESC>ea'<ESC>
 vnoremap <leader>' <ESC>`<i'<ESC>`>la'<ESC>
 " Exit insert mode
 inoremap jk <ESC>
-inoremap <ESC> <nop>
+"inoremap <ESC> <nop>
 " Operator Mapping, email
 onoremap i@ :execute "normal! /\\w\\+\\(\\.\\w\\+\\)*@\\(\\w\\+\\.\\)\\+\\w\\+\rv//e\r"<CR>
 " Sudo write
@@ -129,7 +131,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 nnoremap <leader>vv :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> botr cw<CR>
 nnoremap <leader>VV :execute "vimgrep /" . shellescape(expand("<cWORD>")) . "/j **" <Bar> botr cw<CR>
-nnoremap <leader>aa :execute "Ack! " . expand("<cword>")<CR>
+nnoremap <leader>aa :execute "Ack! " . expand("<cword>")<CR> 
 nnoremap <leader>VV :execute "Ack! " . shellescape(expand("<cWORD>"))<CR>
 nnoremap <leader>v :set operatorfunc=GrepOperator<CR>g@
 vnoremap <leader>v :<c-u>call GrepOperator(visualmode())<CR>
@@ -144,6 +146,42 @@ function! GrepOperator(type)
     endif
 
     execute "vimgrep /" . @@ . "/j **" | botr cw
+endfunction
+
+function! AddJSDoc()
+    let l:jsDocregex = '\s*\([a-zA-Z]*\)\s*[:=]\s*function\s*(\s*\(.*\)\s*).*'
+    let l:jsDocregex2 = '\s*function \([a-zA-Z]*\)\s*(\s*\(.*\)\s*).*'
+
+    let l:line = getline('.')
+    let l:indent = indent('.')
+    let l:space = repeat(" ", l:indent)
+
+    if l:line =~ l:jsDocregex
+        let l:flag = 1
+        let l:regex = l:jsDocregex
+    elseif l:line =~ l:jsDocregex2
+        let l:flag = 1
+        let l:regex = l:jsDocregex2
+    else
+        let l:flag = 0
+    endif
+
+    let l:lines = []
+    let l:desc = input('Description :')
+    call add(l:lines, l:space. '/**')
+    call add(l:lines, l:space . ' * ' . l:desc)
+    if l:flag
+        let l:funcName = substitute(l:line, l:regex, '\1', "g")
+        let l:arg = substitute(l:line, l:regex, '\2', "g")
+        let l:args = split(l:arg, '\s*,\s*')
+        call add(l:lines, l:space . ' * @name ' . l:funcName)
+        call add(l:lines, l:space . ' * @function')
+        for l:arg in l:args
+            call add(l:lines, l:space . ' * @param ' . l:arg)
+        endfor
+    endif
+    call add(l:lines, l:space . ' */')
+    call append(line('.')-1, l:lines)
 endfunction
 
 " show the extra status line
@@ -174,6 +212,13 @@ if !exists("g:EasyMotion_loaded")
 	" JK motions: Line motions
 	map <Leader>j <Plug>(easymotion-j)
 	map <Leader>k <Plug>(easymotion-k)
+endif
+
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
 endif
 
 " settings for coffeelint
